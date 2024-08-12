@@ -4,6 +4,7 @@ import Grid from '@mui/material/Grid';
 import Conteiner from '@mui/material/Container'
 import Header from "../../components/headerComponent/Header";
 import { useLoaderData } from "react-router-dom";
+import Footer from "../../components/footerComponent/Footer";
 //import { createContext } from "react";
 
 //const AppContext = createContext(null)
@@ -34,6 +35,7 @@ export const Home = () => {
                     </Grid>
                 </Conteiner>
             </Box>
+            <Footer />
         </div>
     )
 }

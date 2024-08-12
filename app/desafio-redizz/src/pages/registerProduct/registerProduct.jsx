@@ -11,6 +11,8 @@ import Header from '../../components/headerComponent/Header';
 import { yupResolver } from "@hookform/resolvers/yup"
 import * as yup from "yup"
 import { api } from '../../services/api';
+import Footer from '../../components/footerComponent/Footer';
+
 
 const defaultTheme = createTheme();
 
@@ -87,6 +89,7 @@ export default function RegisterProduct() {
                         </Box>
                     </Box>
                 </Container>
+                <Footer></Footer>
             </ThemeProvider>
         </>
     );

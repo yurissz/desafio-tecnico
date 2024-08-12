@@ -14,6 +14,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup"
 import * as yup from "yup"
 import { api } from '../../services/api';
+import Footer from '../../components/footerComponent/Footer';
 
 const defaultTheme = createTheme();
 
@@ -124,6 +125,7 @@ export default function SignUp() {
                         </Box>
                     </Box>
                 </Container>
+                <Footer />
             </ThemeProvider >
         </>
     );

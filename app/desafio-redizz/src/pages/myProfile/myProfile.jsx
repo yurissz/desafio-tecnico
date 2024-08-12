@@ -3,6 +3,8 @@ import { Typography, Container } from "@mui/material"
 import Grid from '@mui/material/Grid';
 import { useLoaderData } from "react-router-dom";
 import CardProfile from '../../components/cardProfileComponent/CardProfile'
+import Footer from '../../components/footerComponent/Footer';
+
 
 export const MyProfile = () => {
 
@@ -44,6 +46,7 @@ export const MyProfile = () => {
                 <Grid display="flex" direction="row" justifyContent="center" marginRight="50px">
                 </Grid>
             </Container>
+
         </div>
     )
 }
