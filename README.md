@@ -3,7 +3,7 @@ Uma simulação de compra e venda de serviços no ramo tributário. :balance_sca
 
 ## Projeto :alien:
 * Autenticação do Usuário utilizando jsonwebtoken (JWT)
-* * Geração automática de token 
+* Geração automática de token 
 * Interação de API usando o Axios
 * Formuláros com o React Hook Form
 * Rotas com o React Router
