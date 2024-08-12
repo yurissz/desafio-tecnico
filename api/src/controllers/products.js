@@ -40,17 +40,18 @@ const readOneProduct = async (req, res) => {
 
 const registerProduct = async (req, res) => {
 
-    const { product } = req.body
+    const { product, description } = req.body
 
     try {
 
-        if (!product) {
+        if (!product || !description) {
             return res.status(400).json({ message: "Verifique o campo de texto está preenchido" })
         }
 
         await prisma.products.create({
             data: {
-                product
+                product,
+                description
             },
         })
 
@@ -65,12 +66,12 @@ const registerProduct = async (req, res) => {
 
 const updateProduct = async (req, res) => {
 
-    const { product } = req.body
+    const { product, description } = req.body
     const { id } = req.params
 
     try {
 
-        if (!product) {
+        if (!product || !description) {
             return res.status(400).json({ message: "Verifique se o campo de texto está preenchido" })
         }
 
@@ -89,7 +90,8 @@ const updateProduct = async (req, res) => {
                 id: (+id)
             },
             data: {
-                product
+                product,
+                description
             }
         })
 

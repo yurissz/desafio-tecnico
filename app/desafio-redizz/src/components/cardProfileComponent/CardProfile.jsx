@@ -1,10 +1,10 @@
-//import * as React from 'react';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
-import { Button, CardActionArea, CardActions } from '@mui/material';
+import { CardActionArea, CardActions } from '@mui/material';
 import PropTypes from 'prop-types';
 import { makeRequest } from '../../utils/makeRequest'
+import { useEffect, useState } from 'react';
 
 
 CardComponent.propTypes = {
@@ -13,18 +13,18 @@ CardComponent.propTypes = {
 
 export default function CardComponent({ item }) {
 
-    const { product, description } = item
+    const [productDecription, setProductDescription] = useState([])
 
-    const user = JSON.parse(localStorage.getItem("user"))
-
-    const buttonTenhoInteresse = async () => {
-        const require = await makeRequest('/request', 'POST', {
-            productId: (+item.id),
-            userEmail: user.email
-        })
-        console.log(require);
+    const functionRenderProducts = async () => {
+        const { productId } = item
+        const product = productId.toString()
+        const produto = await makeRequest(`/product/${product}`, 'GET')
+        setProductDescription(produto)
     }
 
+    useEffect(() => {
+        functionRenderProducts()
+    }, [])
 
     return (
         <Card sx={{
@@ -33,20 +33,16 @@ export default function CardComponent({ item }) {
             marginLeft: "4%",
         }}>
             <CardActionArea>
-
                 <CardContent>
                     <Typography gutterBottom variant="h5" component="div">
-                        {product}
+                        {productDecription.product}
                     </Typography>
                     <Typography variant="body2" color="text.secondary">
-                        {description}
+                        {productDecription.description}
                     </Typography>
                 </CardContent>
             </CardActionArea>
             <CardActions>
-                <Button size="small" color="primary" onClick={buttonTenhoInteresse}>
-                    Tenho Interesse
-                </Button>
             </CardActions>
         </Card>
     );

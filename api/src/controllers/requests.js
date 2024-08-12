@@ -38,7 +38,7 @@ const readOneRequest = async (req, res) => {
 
 const updateRequest = async (req, res) => {
 
-    const { idProduct, emailUser } = req.body
+    const { productId, userEmail } = req.body
     const { id } = req.params
 
     try {
@@ -59,7 +59,7 @@ const updateRequest = async (req, res) => {
 
         const user = await prisma.user.findUnique({
             where: {
-                email: emailUser
+                email: userEmail
             }
         })
 
@@ -68,8 +68,8 @@ const updateRequest = async (req, res) => {
                 id: (+id)
             },
             data: {
-                productId: Number(idProduct),
-                userId: Number(user.id)
+                idProduct: Number(productId),
+                idUser: Number(user.id)
             }
         })
 
@@ -113,25 +113,25 @@ const deleteRequest = async (req, res) => {
 
 const createRequest = async (req, res) => {
 
-    const { idProduct, emailUser } = req.body
+    const { productId, userEmail } = req.body
 
     try {
 
         const product = await prisma.products.findUnique({
             where: {
-                id: (+idProduct)
+                id: (+productId)
             },
         })
 
         const user = await prisma.user.findUnique({
             where: {
-                email: emailUser
+                email: userEmail
             }
         })
 
         const request = await prisma.requests.create({
             data: {
-                productId: Number(idProduct),
+                productId: Number(productId),
                 userId: Number(user.id)
             }
         })

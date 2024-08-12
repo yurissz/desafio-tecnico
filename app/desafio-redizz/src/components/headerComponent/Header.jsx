@@ -1,4 +1,3 @@
-//import * as React from 'react';
 import { styled, alpha } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -63,6 +62,10 @@ export default function Header() {
         navigate('/home')
     }
 
+    const goToProfile = () => {
+        navigate('/profile')
+    }
+
     return (
         <Box sx={{
             flexGrow: 1,
@@ -86,7 +89,7 @@ export default function Header() {
                                 <Tab label="Cadastrar Serviço" style={{ color: 'white' }}
                                     onClick={goToRegisterProduct}></Tab>
 
-                                <Tab label="Meu Perfil" style={{ color: "white" }}></Tab>
+                                <Tab label="Meu Perfil" style={{ color: "white" }} onClick={goToProfile}></Tab>
                             </Tabs>
                         </Box>
                         <Search>

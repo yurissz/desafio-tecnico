@@ -2,12 +2,18 @@ const express = require("express");
 const user = require("../controllers/user");
 const product = require("../controllers/products")
 const request = require("../controllers/requests")
+const auth = require("../middleware/auth")
+
 
 const route = express()
 
+route.post("/user", user.registerUser)
+route.post("/login", user.login)
+
+route.use(auth)
+
 route.get("/user", user.readUsers)
 route.get("/user/:id", user.readOneUser)
-route.post("/user", user.registerUser)
 route.put("/user/:id", user.updateUser)
 route.delete("/user/:id", user.deleteUser)
 route.post("/login", user.login)

@@ -10,15 +10,48 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useForm } from "react-hook-form";
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { yupResolver } from "@hookform/resolvers/yup"
+import * as yup from "yup"
+import { api } from '../../services/api';
+import { useNavigate } from 'react-router-dom';
 
 
 const defaultTheme = createTheme();
 
 export default function SignIn() {
 
-    const { register, handleSubmit } = useForm();
-    const onSubmit = data => console.log(data);
+    const navigate = useNavigate()
+
+    const schema = yup.object({
+        email: yup.string().required("Digite o email por favor"),
+        password: yup.string().required("Digite a senha por favor")
+            .min(8, 'A senha no mínimo deve possuir 8 caracteres')
+    })
+
+    const { register, handleSubmit, formState: { errors } } = useForm({
+        resolver: yupResolver(schema)
+    });
+
+    const hadleSubmitLogin = async (inputValue) => {
+        try {
+            const { data } = await api.post('/login', { email: inputValue.email, password: inputValue.password })
+
+            console.log(data);
+
+            localStorage.setItem("user", JSON.stringify(data))
+            localStorage.setItem("token", data.token)
+
+            navigate('/home')
+
+        } catch (error) {
+            console.log(error);
+            alert("Ocorreu um erro")
+        }
+    }
+
+    console.log(errors);
+
 
     return (
         <ThemeProvider theme={defaultTheme} >
@@ -38,7 +71,7 @@ export default function SignIn() {
                     <Typography component="h1" variant="h5">
                         Sign in
                     </Typography>
-                    <Box component="form" onSubmit={handleSubmit(onSubmit)} noValidate sx={{ mt: 1 }}>
+                    <Box component="form" onSubmit={handleSubmit(hadleSubmitLogin)} noValidate sx={{ mt: 1 }}>
                         <TextField
                             margin="normal"
                             fullWidth
@@ -46,6 +79,7 @@ export default function SignIn() {
                             label="Email Address"
                             {...register("email")}
                         />
+                        <p>{errors.email?.message}</p>
                         <TextField
                             margin="normal"
                             fullWidth
@@ -53,6 +87,7 @@ export default function SignIn() {
                             type="password"
                             {...register("password")}
                         />
+                        <p>{errors.password?.message}</p>
                         <Button
                             type="submit"
                             fullWidth

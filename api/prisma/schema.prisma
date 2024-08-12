@@ -11,7 +11,8 @@ generator client {
 // prisma/schema.prisma
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+  url      = "postgresql://database-redizz_owner:5mFQIe0XaBnO@ep-polished-lake-a5t9odq7.us-east-2.aws.neon.tech/database-redizz?sslmode=require"
+
   // uncomment next line if you use Prisma <5.10
   // directUrl = env("DATABASE_URL_UNPOOLED")
 }
@@ -28,9 +29,10 @@ model User {
 }
 
 model Products {
-  id       Int        @id @default(autoincrement())
-  product  String
-  Requests Requests[]
+  id          Int        @id @default(autoincrement())
+  product     String
+  description String
+  Requests    Requests[]
 }
 
 model Requests {

@@ -1,4 +1,5 @@
 const { PrismaClient } = require('@prisma/client');
+const jwt = require("jsonwebtoken")
 const prisma = new PrismaClient({
     log: ['query']
 });
@@ -145,28 +146,39 @@ const deleteUser = async (req, res) => {
 }
 
 const login = async (req, res) => {
-    const { email, password } = req.body
+    const { email, password } = req.body;
 
     try {
         const user = await prisma.user.findUnique({
             where: {
-                email,
-                password
-            }
+                email
+            },
         })
-        console.log(user);
-
 
         if (!user) {
-            res.status(400).json({ message: "A senha está incorreta" })
+            return res
+                .status(404)
+                .json({ message: "Email ou senha inválidos" });
         }
 
-        res.status(200).json({ user })
+        if (password !== user.password) {
+            return res
+                .status(400)
+                .json({ message: "Invalid username and/or password." });
+        }
+
+        const token = jwt.sign({ id: user.id }, "redizz", {
+            expiresIn: "8h",
+        });
+
+        const { password: _, ...loginUser } = user;
+
+        return res.status(200).json({ ...loginUser, token });
     } catch (error) {
-        res.status(400).json(error.message)
-        console.log(error);
+        return res.status(500).json({ message: error.message });
     }
-}
+};
+
 
 module.exports = {
     registerUser,
