@@ -1,4 +1,4 @@
-# Projeto DireitoFácil (Desafio Técnico - Redizz)
+# Projeto DireitoFácil
 Uma simulação de compra e venda de serviços no ramo tributário. :balance_scale:	
 
 ## Projeto :alien:
