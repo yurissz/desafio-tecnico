@@ -16,7 +16,11 @@ Um projeto fullstack: simulação de compra e venda de serviços no ramo tribut�
 * HTML
 * CSS
 * React
+* React Hook Form
+* React Router Dom
 * Express
+* Jsonwebtoken (JWT)
+* Axios
 * Postgres
 * Material UI
 
