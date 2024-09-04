@@ -1,5 +1,5 @@
 # Projeto DireitoFácil
-Uma simulação de compra e venda de serviços no ramo tributário. :balance_scale:	
+Um projeto fullstack: simulação de compra e venda de serviços no ramo tributário. :balance_scale:	
 
 ## Projeto :alien:
 * Autenticação do Usuário utilizando jsonwebtoken (JWT)
@@ -10,6 +10,15 @@ Uma simulação de compra e venda de serviços no ramo tributário. :balance_sca
 * Cadastro De Usuário
 * Cadastro de Serviços
 * Listagem de Serviços
+
+## Ferramentas e linguagens usadas 🪓
+* Javascript
+* HTML
+* CSS
+* React
+* Express
+* Postgres
+* Material UI
 
 ## Endpoints :telephone:
 * POST /user - Cadastra Usuário
